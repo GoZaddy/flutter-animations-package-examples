@@ -6,8 +6,6 @@ class TestingFadeScale extends StatefulWidget {
   _TestingFadeScaleState createState() => _TestingFadeScaleState();
 }
 
-enum WhyFarther { harder, smarter, selfStarter, tradingCharter }
-
 class _TestingFadeScaleState extends State<TestingFadeScale>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
@@ -40,7 +38,6 @@ class _TestingFadeScaleState extends State<TestingFadeScale>
       case AnimationStatus.dismissed:
         return false;
     }
-    assert(false);
     return null;
   }
 
@@ -48,8 +45,7 @@ class _TestingFadeScaleState extends State<TestingFadeScale>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('FadeScale Transition'),
-        
+        title: const Text('Testing FadeScale Transition'),
       ),
       body: Column(
         children: <Widget>[
@@ -74,9 +70,11 @@ class _TestingFadeScaleState extends State<TestingFadeScale>
               ],
             ),
           ),
-
-          FadeScaleTransition(
+          AnimatedBuilder(
             animation: _controller,
+            builder: (context, child) {
+              return FadeScaleTransition(animation: _controller, child: child);
+            },
             child: Container(
               height: 200,
               width: 200,
@@ -85,7 +83,6 @@ class _TestingFadeScaleState extends State<TestingFadeScale>
           ),
         ],
       ),
-      
     );
   }
 }
